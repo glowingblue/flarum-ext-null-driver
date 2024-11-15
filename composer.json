@@ -1,0 +1,91 @@
+{
+    "name": "glowingblue/null-driver",
+    "description": "Exposes Flarum's NullDriver to be selected as an email driver in the Admin settings.",
+    "keywords": [
+        "flarum",
+        "driver",
+        "email",
+        "migration",
+        "null"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "support": {
+        "source": "https://github.com/glowingblue/flarum-ext-null-driver",
+        "forum": "https://discuss.flarum.org/d/"
+    },
+    "homepage": "https://glowingblue.com/en/",
+    "require": {
+        "flarum/core": "^1.2.0"
+    },
+    "authors": [
+        {
+            "name": "Glowing Blue AG",
+            "email": "dev@glowingblue.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GlowingBlue\\NullDriver\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "GB Null Driver",
+            "category": "feature",
+            "icon": {
+                "name": "fas fa-ban",
+                "color": "#fff",
+                "backgroundColor": "#00a7e3"
+            }
+        },
+        "flarum-cli": {
+            "modules": {
+                "admin": false,
+                "forum": false,
+                "js": false,
+                "jsCommon": false,
+                "css": false,
+                "locale": false,
+                "gitConf": true,
+                "githubActions": true,
+                "prettier": false,
+                "typescript": false,
+                "bundlewatch": false,
+                "backendTesting": true,
+                "editorConfig": true,
+                "styleci": false
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload-dev": {
+        "psr-4": {
+            "GlowingBlue\\NullDriver\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "analyse:phpstan": "phpstan analyse",
+        "clear-cache:phpstan": "phpstan clear-result-cache",
+        "test": [
+            "@test:unit",
+            "@test:integration"
+        ],
+        "test:unit": "phpunit -c tests/phpunit.unit.xml",
+        "test:integration": "phpunit -c tests/phpunit.integration.xml",
+        "test:setup": "@php tests/integration/setup.php"
+    },
+    "scripts-descriptions": {
+        "analyse:phpstan": "Run static analysis",
+        "test": "Runs all tests.",
+        "test:unit": "Runs all unit tests.",
+        "test:integration": "Runs all integration tests.",
+        "test:setup": "Sets up a database for use with integration tests. Execute this only once."
+    },
+    "require-dev": {
+        "flarum/phpstan": "*",
+        "flarum/testing": "^1.0.0"
+    }
+}
