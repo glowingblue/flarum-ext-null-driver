@@ -23,7 +23,7 @@ class ToggleNotificationsCommand extends AbstractCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('notifications:disable')
@@ -31,7 +31,7 @@ class ToggleNotificationsCommand extends AbstractCommand
             ->setDescription('Disable or enable forum notifications.');
     }
 
-    protected function fire()
+    protected function fire(): void
     {
         $commandName = $this->input->getFirstArgument();
         $settingKey  = 'glowingblue-null-driver.forum-notifications.enabled';
