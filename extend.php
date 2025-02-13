@@ -13,8 +13,10 @@ namespace GlowingBlue\NullDriver;
 
 use Flarum\Extend;
 use GlowingBlue\NullDriver\Provider\NullEmailDriverProvider;
+use GlowingBlue\NullDriver\Provider\NullNotificationServiceProvider;
 
 return [
     (new Extend\ServiceProvider())
         ->register(NullEmailDriverProvider::class)
+        ->register(NullNotificationServiceProvider::class),
 ];
