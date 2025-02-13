@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of glowingblue/null-driver.
+ *
+ * Copyright (c) Glowing Blue AG.
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace GlowingBlue\NullDriver\Tests\integration\api;
 
 use Carbon\Carbon;
@@ -7,7 +16,6 @@ use Flarum\Notification\Notification;
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
 use Flarum\User\User;
-
 
 class NotificationsDisabledTest extends TestCase
 {
@@ -51,7 +59,7 @@ class NotificationsDisabledTest extends TestCase
                             'title'   => 'New discussion',
                         ],
                         'id'         => '1',
-                        'type' => 'discussions',
+                        'type'       => 'discussions',
                     ],
                 ],
             ])

@@ -15,7 +15,6 @@ use Flarum\Extend;
 use GlowingBlue\NullDriver\Console\ToggleNotificationsCommand;
 use GlowingBlue\NullDriver\Provider\NullEmailDriverProvider;
 use GlowingBlue\NullDriver\Provider\NullNotificationProvider;
-use GlowingBlue\NullDriver\ShouldDisableNotifications;
 
 return [
     (new Extend\ServiceProvider())
@@ -24,7 +23,7 @@ return [
     (new Extend\Console())
         ->command(ToggleNotificationsCommand::class),
 
-    (new Extend\Settings)
+    (new Extend\Settings())
         ->default('glowingblue-null-driver.forum-notifications.enabled', true),
 
     (new Extend\Conditional())
