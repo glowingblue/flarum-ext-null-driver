@@ -32,26 +32,21 @@ class ToggleNotificationsCommand extends AbstractCommand
     }
 
     protected function fire(): void
-    {
-        $commandName = $this->input->getFirstArgument();
-        $settingKey  = 'glowingblue-null-driver.forum-notifications.enabled';
+{
+    $commandName = $this->input->getFirstArgument();
+    $settingKey = 'glowingblue-null-driver.forum-notifications.enabled';
 
-        $current = (bool) $this->settings->get($settingKey);
+    $currentState = (bool) $this->settings->get($settingKey);
+    $desiredState = $commandName === 'notifications:disable' ? false : true;
 
-        if ($commandName === 'notifications:disable') {
-            if (!$current) {
-                $this->error('Notifications are already disabled.');
-            } else {
-                $this->settings->set($settingKey, false);
-                $this->info('Notifications disabled successfully.');
-            }
-        } elseif ($commandName === 'notifications:enable') {
-            if ($current) {
-                $this->error('Notifications are already enabled.');
-            } else {
-                $this->settings->set($settingKey, true);
-                $this->info('Notifications enabled successfully.');
-            }
-        }
+    if ($currentState === $desiredState) {
+        $state = $desiredState ? 'enabled' : 'disabled';
+        $this->error("Notifications are already $state.");
+        return;
     }
+
+    $this->settings->set($settingKey, $desiredState);
+    $action = $desiredState ? 'enabled' : 'disabled';
+    $this->info("Notifications $action successfully.");
+}
 }
