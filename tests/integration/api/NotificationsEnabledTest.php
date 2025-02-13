@@ -9,7 +9,7 @@ use Flarum\Testing\integration\TestCase;
 use Flarum\User\User;
 
 
-class NoNotificationsTest extends TestCase
+class NotificationsEnabledTest extends TestCase
 {
     use RetrievesAuthorizedUsers;
 
@@ -33,13 +33,14 @@ class NoNotificationsTest extends TestCase
                 ['id' => 1, 'discussion_id' => 1, 'user_id' => 2, 'type' => 'comment', 'content' => '<t><p>Following</p></t>', 'is_private' => 0, 'number' => 1],
             ],
         ]);
-    }
 
+        $this->setting('glowingblue-null-driver.forum-notifications.enabled', true);
+    }
 
     /**
      * @test
      */
-    public function no_notifications_are_sent_when_provider_enabled()
+    public function notifications_are_sent_when_provider_enabled()
     {
         $response = $this->send(
             $this->request('PATCH', '/api/discussions/1', [
@@ -70,8 +71,8 @@ class NoNotificationsTest extends TestCase
 
         $response = json_decode($response->getBody(), true);
 
-        $this->assertEquals(0, count($response['data']));
-        $this->assertEquals(0, User::query()->find($notificationRecipient)->notifications()->count());
-        $this->assertEquals(0, Notification::query()->count());
+        $this->assertEquals(1, count($response['data']));
+        $this->assertEquals(1, User::query()->find($notificationRecipient)->notifications()->count());
+        $this->assertEquals(1, Notification::query()->count());
     }
 }
