@@ -12,11 +12,24 @@
 namespace GlowingBlue\NullDriver;
 
 use Flarum\Extend;
+use GlowingBlue\NullDriver\Console\ToggleNotificationsCommand;
 use GlowingBlue\NullDriver\Provider\NullEmailDriverProvider;
 use GlowingBlue\NullDriver\Provider\NullNotificationProvider;
+use GlowingBlue\NullDriver\ShouldDisableNotifications;
 
 return [
     (new Extend\ServiceProvider())
-        ->register(NullEmailDriverProvider::class)
-        ->register(NullNotificationProvider::class),
+        ->register(NullEmailDriverProvider::class),
+
+    (new Extend\Console())
+        ->command(ToggleNotificationsCommand::class),
+
+    (new Extend\Settings)
+        ->default('glowingblue-null-driver.forum-notifications.enabled', true),
+
+    (new Extend\Conditional())
+        ->when(new ShouldDisableNotifications(), fn () => [
+            (new Extend\ServiceProvider())
+                ->register(NullNotificationProvider::class),
+        ]),
 ];
