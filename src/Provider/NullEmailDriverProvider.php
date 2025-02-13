@@ -14,7 +14,7 @@ namespace GlowingBlue\NullDriver\Provider;
 use Flarum\Foundation\AbstractServiceProvider;
 use Flarum\Mail\NullDriver;
 
-class NullDriverProvider extends AbstractServiceProvider
+class NullEmailDriverProvider extends AbstractServiceProvider
 {
     /**
      * {@inheritdoc}
