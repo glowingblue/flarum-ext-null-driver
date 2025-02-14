@@ -16,7 +16,8 @@
     },
     "homepage": "https://glowingblue.com/en/",
     "require": {
-        "flarum/core": "^1.2.0"
+        "flarum/core": "^1.2.0",
+        "php": "^8.1"
     },
     "authors": [
         {
