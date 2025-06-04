@@ -12,17 +12,13 @@
 namespace GlowingBlue\NullDriver\Provider;
 
 use Flarum\Foundation\AbstractServiceProvider;
-use Flarum\Mail\NullDriver;
 
-class NullDriverProvider extends AbstractServiceProvider
+class NullNotificationProvider extends AbstractServiceProvider
 {
-    /**
-     * {@inheritdoc}
-     */
     public function register()
     {
-        $this->container->extend('mail.supported_drivers', function ($drivers) {
-            return array_merge($drivers, ['null' => NullDriver::class]);
+        $this->container->extend('flarum.notification.drivers', function ($drivers) {
+            return [];
         });
     }
 }
